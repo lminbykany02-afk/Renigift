@@ -1,336 +1,312 @@
+HTML
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>Ren y la aventura Baggio ♡</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOAH & REN: CAOS TOTAL</title>
 <style>
-  :root{--pink:#ffd9e8;--deep:#d77ca5;--cream:#fff9fc;--ink:#67485b}
-  *{box-sizing:border-box}
-  html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#fff4fa;font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:var(--ink);touch-action:none}
-  #app{height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px;gap:7px}
-  #top{width:min(100%,980px);display:flex;align-items:center;justify-content:space-between;gap:8px;padding:4px 6px;font-size:13px;font-weight:800}
-  #title{letter-spacing:.4px}
-  #stats{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
-  .pill{background:#fff;border:2px solid #f4c1d7;border-radius:999px;padding:5px 10px;box-shadow:0 2px 0 #edb4cd}
-  #gameWrap{position:relative;width:min(100%,980px);flex:1;min-height:220px;max-height:calc(100dvh - 142px);display:flex;align-items:center;justify-content:center}
-  canvas{width:100%;height:100%;display:block;border:4px solid #fff;border-radius:15px;box-shadow:0 5px 0 #efbfd4;background:#fff;image-rendering:pixelated;touch-action:none}
-  #message{position:absolute;top:12px;left:50%;transform:translateX(-50%);background:#fffafcdd;border:2px solid #f5c5da;border-radius:12px;padding:7px 12px;font-size:12px;font-weight:800;text-align:center;max-width:90%;pointer-events:none;box-shadow:0 3px 0 #eebbd0}
-  #controls{width:min(100%,980px);display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 4px}
-  .cluster{display:flex;gap:8px;align-items:center}
-  .control{border:0;border-radius:17px;background:#fff;border:3px solid #f1b9d1;box-shadow:0 5px 0 #df9fbd;color:#a9577e;font-size:22px;font-weight:900;min-width:60px;height:55px;touch-action:none;user-select:none;-webkit-user-select:none}
-  .control:active,.control.active{transform:translateY(3px);box-shadow:0 2px 0 #df9fbd;background:#ffe5f0}
-  .control.small{font-size:13px;min-width:62px;padding:0 10px}
-  .control.jump{background:#ffe5ef}
-  #hint{font-size:10px;opacity:.72;text-align:center;margin-top:-2px}
-  #overlay{position:absolute;inset:0;display:none;align-items:center;justify-content:center;background:#fff8fcdd;border-radius:12px;padding:14px;z-index:5}
-  #overlay.show{display:flex}
-  .panel{max-width:520px;width:100%;background:#fffafd;border:4px solid #f5c4da;border-radius:22px;padding:20px 18px;text-align:center;box-shadow:0 7px 0 #e8a9c5;position:relative;overflow:hidden}
-  .panel h1{font-size:clamp(22px,5vw,36px);margin:3px 0 8px;color:#c86694}
-  .panel p{line-height:1.5;margin:7px 0 14px}
-  .bigemoji{font-size:42px;line-height:1.2}
-  .fancy{font-family:Georgia,'Times New Roman',serif;font-style:italic;letter-spacing:.5px}
-  .claim{border:0;background:#ffb8d4;color:#8e4267;font-size:18px;font-weight:900;border-radius:14px;padding:12px 26px;box-shadow:0 5px 0 #df8fb2;cursor:pointer}
-  .claim:active{transform:translateY(3px);box-shadow:0 2px 0 #df8fb2}
-  .confetti{position:absolute;top:-25px;font-size:20px;animation:fall 2.8s linear infinite;pointer-events:none}
-  @keyframes fall{to{transform:translateY(390px) rotate(360deg)}}
-  #startScreen{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:#fff6fbdd;border-radius:12px;z-index:3;padding:14px}
-  #startScreen.hidden{display:none}
-  @media(min-width:700px){.control{min-width:72px;height:58px}.control.small{min-width:82px}#top{font-size:15px}}
+:root {
+  --rosa:#ffb7d5;
+  --azul:#bde8ff;
+  --violeta:#d9c8ff;
+  --tinta:#30243b;
+  --blanco:#fffdfd;
+}
+* { box-sizing:border-box; }
+body {
+  margin:0;
+  min-height:100vh;
+  background:linear-gradient(145deg,#fff4fa,#edf8ff);
+  color:var(--tinta);
+  font-family:"Trebuchet MS",system-ui,sans-serif;
+}
+button {
+  font:inherit;
+  font-weight:800;
+  border:0;
+  border-radius:16px;
+  padding:13px 17px;
+  cursor:pointer;
+  background:var(--tinta);
+  color:white;
+  box-shadow:0 5px 0 #b7a9c5;
+}
+button:active { transform:translateY(3px); }
+.wrap { max-width:720px; margin:auto; padding:18px 14px 35px; }
+header { text-align:center; padding:12px 0; }
+.eyebrow { font-size:.78rem; font-weight:900; letter-spacing:.13em; }
+h1 { font-size:clamp(2.3rem,9vw,3.7rem); line-height:.98; margin:12px 0; letter-spacing:-.05em; }
+h1 span { color:#ff69aa; }
+.subtitle { line-height:1.5; color:#6e6077; }
+.pills { display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin:16px 0; }
+.pill { background:white; border:2px solid #f2dcec; border-radius:99px; padding:7px 12px; font-size:.85rem; font-weight:800; }
+.card { background:#ffffffdf; border:2px solid white; border-radius:25px; padding:18px; box-shadow:0 12px 35px #8d75a31b; margin:14px 0; }
+.characters { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.character { border-radius:22px; padding:14px; text-align:center; }
+.noah { background:linear-gradient(145deg,#e1f5ff,#f4fbff); }
+.ren { background:linear-gradient(145deg,#ffe4f0,#fff8fb); }
+.avatar { display:block; font-size:clamp(3.5rem,15vw,5.3rem); animation:bob 2.4s ease-in-out infinite; }
+.ren .avatar { animation-delay:.4s; }
+@keyframes bob {
+  0%,100% { transform:translateY(0) rotate(-2deg); }
+  50% { transform:translateY(-7px) rotate(2deg); }
+}
+.character strong { display:block; font-size:1.1rem; }
+.character small { display:block; color:#76677c; margin-top:4px; }
+h2 { font-size:1.35rem; margin:0 0 9px; }
+p { line-height:1.55; }
+.primary { width:100%; background:linear-gradient(90deg,#ff70b4,#a48bff); box-shadow:0 5px 0 #c8a3d8; font-size:1.02rem; padding:15px; }
+.hidden { display:none!important; }
+.game-top { display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom:12px; }
+.tag { background:#ffe58a; border-radius:99px; padding:7px 11px; font-size:.85rem; font-weight:900; }
+.progress { height:10px; background:#f0e5f3; border-radius:99px; overflow:hidden; margin:12px 0 16px; }
+.progress div { height:100%; width:0; background:linear-gradient(90deg,#ff83bf,#9d9aff); transition:width .2s; }
+.arena { min-height:240px; position:relative; overflow:hidden; border-radius:22px; background:linear-gradient(#e9f8ff,#fff0f7); border:2px dashed #e7d6f2; padding:14px; }
+.instruction { text-align:center; font-weight:800; }
+.toast { min-height:28px; text-align:center; font-weight:800; color:#8564b4; margin:10px 0; }
+.dodge-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:9px; margin-top:12px; }
+.dodge-grid button { min-height:58px; font-size:1.5rem; background:white; color:var(--tinta); box-shadow:0 4px 0 #e1d2ed; border:2px solid #f3e5f3; }
+.safe { background:#d8f8e5!important; }
+.danger { background:#ffdce7!important; }
+.reaction-button { width:100%; min-height:110px; font-size:1.2rem; background:#b8e8ff; color:#26364b; }
+.result { text-align:center; padding:10px 0; }
+.big { display:block; font-size:4rem; }
+footer { text-align:center; color:#8a7a92; font-size:.8rem; margin-top:22px; }
+@media(min-width:600px) { .card { padding:24px; } .arena { min-height:280px; } }
 </style>
 </head>
 <body>
-<div id="app">
-  <header id="top">
-    <div id="title">♡ REN Y LA AVENTURA BAGGIO ♡</div>
-    <div id="stats"><span class="pill" id="levelLabel">Nivel 1 / 3</span><span class="pill" id="scoreLabel">☆ 0</span></div>
-  </header>
-  <main id="gameWrap">
-    <canvas id="game" width="800" height="450" aria-label="Videojuego de aventura pixel art"></canvas>
-    <div id="message">Ayudá a Ren a encontrar las cajitas de Baggio ♡</div>
-    <div id="startScreen">
-      <div class="panel">
-        <div class="bigemoji">🐰 ☆ 🧃</div>
-        <h1>Una aventura para Ren</h1>
-        <p>Un conejito blanco, tres mundos y unas cajitas de Baggio por encontrar.<br><span class="fancy">¿Listo para la misión?</span></p>
-        <button class="claim" id="startBtn">¡Jugar! ♡</button>
-      </div>
+<div class="wrap">
+<header>
+  <div class="eyebrow">UN VIDEOJUEGO POCO AUTORIZADO</div>
+  <h1>NOAH <span>&</span> REN<br>CAOS TOTAL</h1>
+  <p class="subtitle">Tres pruebas. Cero dignidad. Una amistad que necesita supervisión.</p>
+  <div class="pills">
+    <span class="pill">✨ 3 minijuegos</span>
+    <span class="pill">🏆 Puntuación</span>
+    <span class="pill">🤡 Final secreto</span>
+  </div>
+</header>
+
+<main>
+<section id="intro" class="card">
+  <div class="characters">
+    <div class="character noah">
+      <span class="avatar">🦝</span>
+      <strong>NOAH</strong>
+      <small>Mapache y agente del caos</small>
     </div>
-    <div id="overlay">
-      <div class="panel" id="panelContent"></div>
+    <div class="character ren">
+      <span class="avatar">🐰</span>
+      <strong>REN</strong>
+      <small>Conejo responsable (supuestamente)</small>
     </div>
-  </main>
-  <nav id="controls" aria-label="Controles del juego">
-    <div class="cluster">
-      <button class="control" id="left" aria-label="Mover a la izquierda">◀</button>
-      <button class="control" id="right" aria-label="Mover a la derecha">▶</button>
+  </div>
+  <h2 style="margin-top:20px">Misión: sobrevivir.</h2>
+  <p>El sistema necesita que junten puntos para recuperar el control de la realidad. Lamentablemente, el sistema lo programó una tostadora.</p>
+  <button id="startBtn" class="primary">EMPEZAR EL DESASTRE →</button>
+</section>
+
+<section id="game" class="card hidden">
+  <div class="game-top">
+    <span id="levelTag" class="tag">PRUEBA 1/3</span>
+    <strong>⭐ <span id="score">0</span></strong>
+  </div>
+  <div class="progress"><div id="progressFill"></div></div>
+  <h2 id="gameTitle"></h2>
+  <p id="gameDesc" class="instruction"></p>
+  <div id="arena" class="arena"></div>
+  <div id="toast" class="toast" aria-live="polite"></div>
+  <div id="controls"></div>
+</section>
+
+<section id="ending" class="card hidden">
+  <div class="result">
+    <span class="big" id="endingEmoji">🏆</span>
+    <h2 id="endingTitle"></h2>
+    <p id="endingText"></p>
+    <div class="pills">
+      <span class="pill">Puntos: <span id="finalScore">0</span></span>
+      <span class="pill">Rango: <span id="rank"></span></span>
     </div>
-    <div class="cluster">
-      <button class="control small" id="shoot" aria-label="Lanzar estrellitas">✦ pew</button>
-      <button class="control jump" id="jump" aria-label="Saltar">⬆ SALTAR</button>
-    </div>
-  </nav>
-  <div id="hint">Usá ◀ ▶ para moverte · SALTAR para brincar · ✦ para lanzar estrellitas</div>
+  </div>
+  <button id="againBtn" class="primary">JUGAR OTRA VEZ ↻</button>
+</section>
+</main>
+<footer>Hecho con cariño, caos y una cantidad preocupante de Baggio. 💗</footer>
 </div>
+
 <script>
-(() => {
-  const canvas = document.getElementById('game'), ctx = canvas.getContext('2d');
-  ctx.imageSmoothingEnabled = false;
-  const W=800,H=450, floorY=380;
-  const ui={level:document.getElementById('levelLabel'),score:document.getElementById('scoreLabel'),message:document.getElementById('message'),overlay:document.getElementById('overlay'),panel:document.getElementById('panelContent'),start:document.getElementById('startScreen')};
-  const input={left:false,right:false,jump:false,shoot:false};
-  let started=false, gameOver=false, level=1, score=0, camera=0, last=0, frame=0, shootCooldown=0, levelMessageTimer=0;
-  let player, platforms=[], collectibles=[], enemies=[], bullets=[], particles=[], door=null, endingMode=false, transitionFlash=0, keys=[];
-  const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
-  const rand=(a,b)=>a+Math.random()*(b-a);
-  function rect(x,y,w,h,c){ctx.fillStyle=c;ctx.fillRect(Math.round(x),Math.round(y),Math.round(w),Math.round(h))}
-  function text(t,x,y,size=16,color='#67485b',align='left'){ctx.fillStyle=color;ctx.font=`bold ${size}px system-ui`;ctx.textAlign=align;ctx.fillText(t,x,y)}
-  function star(x,y,r,color='#fff'){ctx.fillStyle=color;ctx.beginPath();ctx.moveTo(x,y-r);ctx.lineTo(x+r*.28,y-r*.28);ctx.lineTo(x+r,y);ctx.lineTo(x+r*.28,y+r*.28);ctx.lineTo(x,y+r);ctx.lineTo(x-r*.28,y+r*.28);ctx.lineTo(x-r,y);ctx.lineTo(x-r*.28,y-r*.28);ctx.closePath();ctx.fill()}
-  function newPlayer(x=70,y=300){return {x,y,w:28,h:32,vx:0,vy:0,onGround:false,face:1,invuln:0,walk:0}}
-  function platform(x,y,w,h,type='ground',unstable=false){return {x,y,w,h,type,unstable,touchedAt:null,removed:false}}
-  function baggio(x,y){return {x,y,w:22,h:28,taken:false,bob:Math.random()*6}}
-  function makeLevel(n){
-    level=n; camera=0; bullets=[];particles=[];endingMode=false;door=null;transitionFlash=0;
-    platforms=[];collectibles=[];enemies=[];
-    player=newPlayer(55,300);
-    if(n===1){
-      ui.message.textContent='Nivel 1: saltá por las nubes y subí la montaña ♡';
-      platforms.push(platform(0,380,260,90),platform(300,350,90,18,'cloud'),platform(415,315,80,18,'cloud'),platform(520,280,85,18,'cloud'));
-      // floating mountain staircase; each platform vanishes five seconds after touch
-      platforms.push(platform(625,340,175,110,'mountain'));
-      for(let i=0;i<6;i++) platforms.push(platform(630+i*24,310-i*39,55,14,'earth',true));
-      platforms.push(platform(755,76,170,18,'summit'));
-      platforms.push(platform(900,380,250,90));
-      collectibles.push(baggio(810,38),baggio(180,340));
-      // decorative little hops / clouds
-      platforms.push(platform(115,315,70,16,'cloud'),platform(205,285,62,16,'cloud'));
-    } else if(n===2){
-      ui.message.textContent='Nivel 2: atardecer, estrellitas y parkour. ¡Pew pew!';
-      platforms.push(platform(0,380,220,90),platform(260,350,85,18,'ground'),platform(380,310,75,18,'ground'),platform(490,350,85,18,'ground'),platform(610,300,85,18,'ground'),platform(735,350,110,18,'ground'),platform(870,305,85,18,'ground'),platform(1000,350,200,90));
-      collectibles.push(baggio(1060,308),baggio(680,258));
-      enemies.push({x:300,y:320,w:24,h:22,type:'fly',vx:1.05,alive:true,baseY:320,phase:0});
-      enemies.push({x:430,y:280,w:28,h:25,type:'turtle',vx:-.65,alive:true,baseY:280,phase:0});
-      enemies.push({x:775,y:318,w:24,h:22,type:'fly',vx:1.1,alive:true,baseY:318,phase:1});
-    } else if(n===3){
-      ui.message.textContent='Nivel 3: seguí las estrellas hasta la puerta blanca…';
-      platforms.push(platform(0,380,260,90,'nightground'),platform(300,380,220,90,'nightground'),platform(560,380,220,90,'nightground'),platform(820,380,220,90,'nightground'));
-      door={x:900,y:272,w:55,h:108};
-    }
-    ui.level.textContent=`Nivel ${n} / 3`;
-    ui.score.textContent=`☆ ${score}`;
-  }
-  function worldWidth(){return level===1?1130:level===2?1200:1050}
-  function startGame(){started=true;gameOver=false;score=0;makeLevel(1);ui.start.classList.add('hidden');ui.overlay.classList.remove('show');}
-  function nextLevel(){transitionFlash=1;makeLevel(level+1);player.x=45;player.y=300;levelMessageTimer=100;}
-  function finishGame(){
-    endingMode=true;gameOver=true;
-    ui.message.textContent='Una amistad desbloqueó el final secreto ♡';
-    ui.panel.innerHTML=`<div class="confetti" style="left:7%;animation-delay:.1s">🎉</div><div class="confetti" style="left:22%;animation-delay:.8s">🎊</div><div class="confetti" style="left:73%;animation-delay:.4s">✦</div><div class="confetti" style="left:90%;animation-delay:1.2s">🎉</div>
-      <div class="bigemoji">🍥</div><h1>¡MISIÓN COMPLETADA!</h1>
-      <p class="fancy" style="font-size:20px;color:#bd5e8a">Felicitaciones, Ren ♡</p>
-      <p>Conseguiste todas las cajitas y llegaste al final.<br>Tu premio oficial es esta fresita rosa: 🍓</p>
-      <p style="font-size:14px">Gracias por ser mi compa de aventuras.<br><b>Este mundo es más bonito porque estás en él.</b><br><span class="fancy">— De alguien que te quiere mucho ♡</span></p>
-      <button class="claim" id="claimBtn">Reclamar 🍓</button>`;
-    ui.overlay.classList.add('show');
-    document.getElementById('claimBtn').addEventListener('click',()=>{
-      ui.panel.innerHTML=`<div class="confetti" style="left:10%;animation-delay:.2s">🎉</div><div class="confetti" style="left:28%;animation-delay:.6s">🎊</div><div class="confetti" style="left:48%;animation-delay:0s">⭐</div><div class="confetti" style="left:70%;animation-delay:1s">🎉</div><div class="confetti" style="left:88%;animation-delay:.4s">🎊</div>
-      <div style="font-size:56px">🍥</div><h1>¡RECLAMADO!</h1><p class="fancy" style="font-size:23px;color:#bd5e8a">Un premio pequeñito<br>para alguien grandote de corazón.</p><div style="font-size:60px;filter:drop-shadow(0 4px 0 #efb0c9)">🍓</div><p>Fin del juego ♡</p><button class="claim" id="againBtn">Jugar otra vez</button>`;
-      document.getElementById('againBtn').addEventListener('click',()=>{ui.overlay.classList.remove('show');startGame()});
-    });
-  }
-  function drawBunny(x,y){
-    // pixel bunny: body, ears, pink inner ears, face and tiny feet
-    rect(x+5,y+10,20,20,'#fff');rect(x+4,y+15,22,13,'#fff');
-    rect(x+6,y-3,7,18,'#fff');rect(x+17,y-6,7,21,'#fff');
-    rect(x+8,y,3,10,'#f6b9d3');rect(x+19,y-2,3,12,'#f6b9d3');
-    rect(x+6,y+25,8,5,'#fff');rect(x+18,y+25,8,5,'#fff');
-    rect(x+8,y+13,3,3,'#61485b');rect(x+20,y+13,3,3,'#61485b');rect(x+15,y+17,3,2,'#e98bad');
-    rect(x+3,y+17,3,4,'#ffc8dd');rect(x+25,y+17,3,4,'#ffc8dd');
-    // little tail
-    rect(x+1,y+22,5,5,'#fff');rect(x+2,y+23,3,3,'#f6dce8');
-  }
-  function drawRaccoon(x,y){
-    rect(x+6,y+7,25,23,'#a9a1b5');rect(x+8,y+1,8,10,'#a9a1b5');rect(x+22,y+1,8,10,'#a9a1b5');
-    rect(x+8,y+4,5,5,'#f5d8e7');rect(x+24,y+4,5,5,'#f5d8e7');
-    rect(x+8,y+13,8,5,'#555064');rect(x+21,y+13,8,5,'#555064');rect(x+16,y+18,5,3,'#f6d9e7');
-    rect(x+8,y+29,8,9,'#a9a1b5');rect(x+22,y+29,8,9,'#a9a1b5');
-    rect(x+31,y+28,16,6,'#a9a1b5');rect(x+40,y+28,6,6,'#555064');rect(x+33,y+28,6,6,'#555064');
-  }
-  function drawBaggio(x,y){
-    // stylized juice carton, no external brand artwork
-    rect(x+3,y+4,18,23,'#f8d7e5');rect(x+3,y+4,18,4,'#e98cb4');rect(x+6,y,12,5,'#fff0f7');
-    rect(x+6,y+11,12,6,'#fff');rect(x+8,y+12,8,4,'#ef9aba');rect(x+7,y+20,10,3,'#d876a2');
-    rect(x+5,y+27,14,2,'#fff');
-  }
-  function drawPlatform(p){
-    if(p.removed)return;
-    if(p.type==='cloud'){
-      rect(p.x,p.y+7,p.w,p.h-4,'#fff');rect(p.x+7,p.y+2,p.w-14,10,'#fff');rect(p.x+14,p.y-2,p.w-28,10,'#fff');
-      rect(p.x+4,p.y+p.h-1,p.w-8,3,'#f6d7e5');
-    } else if(p.type==='earth'){
-      rect(p.x,p.y,p.w,p.h,'#e9c7ae');rect(p.x,p.y,p.w,4,'#9ed8b5');rect(p.x+5,p.y+5,p.w-10,3,'#f6dfcf');
-      rect(p.x+8,p.y+9,4,3,'#d8a98e');
-    } else if(p.type==='summit'){
-      rect(p.x,p.y,p.w,p.h,'#f7d6e4');rect(p.x,p.y,p.w,5,'#fff');rect(p.x+12,p.y+7,p.w-24,4,'#e9b9d0');
-    } else if(p.type==='mountain'){
-      rect(p.x,p.y,p.w,p.h,'#f0d4e0');rect(p.x,p.y,p.w,7,'#fff');rect(p.x+20,p.y+18,10,5,'#e7b9d0');rect(p.x+90,p.y+44,14,5,'#e7b9d0');
-    } else if(p.type==='ground'){
-      rect(p.x,p.y,p.w,p.h,'#b6dfa9');rect(p.x,p.y,p.w,5,'#e9f7cf');rect(p.x+15,p.y+14,8,3,'#8fc98e');
-    } else if(p.type==='nightground'){
-      rect(p.x,p.y,p.w,p.h,'#eee7fa');rect(p.x,p.y,p.w,5,'#fff');rect(p.x+25,p.y+15,9,4,'#d8c9ec');
-    }
-  }
-  function drawBackground(){
-    let grad=ctx.createLinearGradient(0,0,0,H);
-    if(level===1){grad.addColorStop(0,'#ffe8f2');grad.addColorStop(1,'#fff9fc')}
-    if(level===2){grad.addColorStop(0,'#f7a6bd');grad.addColorStop(.55,'#ffc3b5');grad.addColorStop(1,'#ffe7cb')}
-    if(level===3){grad.addColorStop(0,'#26264c');grad.addColorStop(1,'#75628f')}
-    ctx.fillStyle=grad;ctx.fillRect(0,0,W,H);
-    for(let i=0;i<35;i++){
-      let sx=((i*137+42-(level===3?0:camera*.15))%(W+30)+W+30)%(W+30), sy=(i*71+24)%300;
-      star(sx,sy,2+(i%3),level===3?'#fff6c9':'#fff');
-    }
-    if(level===1){
-      // distant pink hills and puffy clouds
-      for(let i=0;i<6;i++){let x=((i*170-camera*.25)%(W+200)+W+200)%(W+200)-50;rect(x,300,120,80,'#fce0ec');rect(x+20,280,75,35,'#fce0ec')}
-      for(let i=0;i<5;i++){let x=((i*210-camera*.4)%(W+180)+W+180)%(W+180)-60;rect(x,90+i%2*40,70,15,'#fff');rect(x+15,78+i%2*40,42,15,'#fff')}
-    }else if(level===2){
-      // blocky sun
-      rect(620,78,72,72,'#ffe6a7');rect(632,66,48,96,'#ffe6a7');rect(608,90,96,48,'#ffe6a7');
-      for(let i=0;i<7;i++){let x=((i*145-camera*.25)%(W+160)+W+160)%(W+160)-50;rect(x,300,115,90,i%2?'#e78ba9':'#dc83a7');rect(x+20,278,70,30,i%2?'#e78ba9':'#dc83a7')}
+(()=>{
+const $=id=>document.getElementById(id);
+const intro=$('intro'), game=$('game'), ending=$('ending');
+const arena=$('arena'), controls=$('controls');
+let score=0, level=0, timer=null, active=false;
+
+const levels=[
+ {title:'¡Atrapa los Baggios!',desc:'Tocá 5 cajitas. Evitá las medias sospechosas.',tag:'PRUEBA 1/3'},
+ {title:'La baldosa maldita',desc:'Tocá las casillas seguras. ¡NO toques la bomba!',tag:'PRUEBA 2/3'},
+ {title:'Reflejos de supervivencia',desc:'Cuando aparezca ¡YA!, tocá el botón. ¡No te adelantes!',tag:'PRUEBA 3/3'}
+];
+
+function clearTimer(){
+ if(timer){clearTimeout(timer);clearInterval(timer);timer=null;}
+ active=false;
+}
+function show(which){
+ intro.classList.toggle('hidden',which!=='intro');
+ game.classList.toggle('hidden',which!=='game');
+ ending.classList.toggle('hidden',which!=='ending');
+}
+function say(t){$('toast').textContent=t;}
+function update(){
+ $('score').textContent=score;
+ $('progressFill').style.width=(level/3*100)+'%';
+}
+function start(){
+ clearTimer();score=0;level=0;update();show('game');runLevel();
+}
+function runLevel(){
+ clearTimer();
+ arena.innerHTML='';controls.innerHTML='';
+ const l=levels[level];
+ $('levelTag').textContent=l.tag;
+ $('gameTitle').textContent=l.title;
+ $('gameDesc').textContent=l.desc;
+ $('progressFill').style.width=(level/3*100)+'%';
+ say('¡Ustedes pueden! Probablemente.');
+ if(level===0)catchGame();
+ if(level===1)dodgeGame();
+ if(level===2)reactionGame();
+}
+function finishLevel(){
+ clearTimer();level++;update();
+ if(level>=3){finishGame();return;}
+ arena.innerHTML='<div style="text-align:center;padding:35px 5px"><div style="font-size:3rem">🎉</div><h2>¡Prueba superada!</h2><p>El sistema está sorprendido.</p><button id="nextBtn">SIGUIENTE DESASTRE →</button></div>';
+ controls.innerHTML='';
+ $('nextBtn').onclick=runLevel;
+}
+
+function catchGame(){
+ let caught=0;
+ arena.innerHTML='<div style="text-align:center;font-weight:800">Baggios atrapados: <span id="caught">0</span>/5</div>';
+ const bad=['🧦','🥦','🪨'];
+ active=true;
+ function spawn(){
+  if(!active)return;
+  const item=document.createElement('button');
+  item.style.cssText='position:absolute;padding:4px;left:'+(5+Math.random()*78)+'%;top:'+(35+Math.random()*48)+'%;background:transparent;box-shadow:none;font-size:2rem';
+  const good=Math.random()>.28;
+  item.textContent=good?'🧃':bad[Math.floor(Math.random()*bad.length)];
+  item.setAttribute('aria-label',good?'Baggio':'Objeto sospechoso');
+  item.onclick=()=>{
+   if(!active)return;
+   if(good){
+    caught++;score+=10;
+    $('caught').textContent=caught;
+    say('¡BAGGIO ASEGURADO! +10');
+   }else{
+    score=Math.max(0,score-5);
+    say('ERA UNA MEDIA. -5 puntos. 😭');
+   }
+   item.remove();update();
+   if(caught>=5){finishLevel();return;}
+  };
+  arena.appendChild(item);
+  setTimeout(()=>item.remove(),1400);
+  timer=setTimeout(spawn,550);
+ }
+ spawn();
+}
+
+function dodgeGame(){
+ let count=0;
+ active=true;
+ function draw(){
+  arena.innerHTML='<div style="text-align:center;font-weight:900">Casillas seguras: '+count+'/5</div><div class="dodge-grid" id="grid"></div>';
+  const grid=$('grid');
+  for(let i=0;i<9;i++){
+   const b=document.createElement('button');
+   b.textContent='❔';
+   b.setAttribute('aria-label','Casilla '+(i+1));
+   b.onclick=()=>{
+    if(!active||b.dataset.done)return;
+    b.dataset.done='1';
+    if(Math.random()>.28){
+     b.textContent=['⭐','🍓','🧃','💖'][Math.floor(Math.random()*4)];
+     b.classList.add('safe');count++;score+=8;
+     say('¡CASILLA SEGURA! +8');
     }else{
-      // moon
-      rect(620,62,54,54,'#fff5d8');rect(640,50,30,54,'#26264c');
-      for(let i=0;i<8;i++){let x=i*112-camera*.15;rect(((x%(W+30))+W+30)%(W+30),340,35,45,'#554d78')}
+     b.textContent='💣';b.classList.add('danger');
+     score=Math.max(0,score-4);say('¡PUM! -4 puntos');
     }
+    update();
+    arena.querySelector('div').textContent='Casillas seguras: '+count+'/5';
+    if(count>=5){finishLevel();return;}
+    if([...grid.children].every(x=>x.dataset.done))draw();
+   };
+   grid.appendChild(b);
   }
-  function drawEnemy(e){
-    if(!e.alive)return;
-    if(e.type==='fly'){
-      rect(e.x+6,e.y+7,13,12,'#8f7ca5');rect(e.x+2,e.y+3,8,5,'#fff');rect(e.x+15,e.y+3,8,5,'#fff');rect(e.x+8,e.y+10,3,3,'#332c4c');rect(e.x+16,e.y+10,3,3,'#332c4c');rect(e.x+10,e.y+17,4,3,'#d57c9c');
-    }else{
-      rect(e.x+2,e.y+8,23,13,'#9cce9c');rect(e.x+7,e.y+3,13,12,'#9cce9c');rect(e.x+10,e.y+7,3,3,'#3e5e4c');rect(e.x+18,e.y+7,3,3,'#3e5e4c');rect(e.x+3,e.y+19,5,4,'#6b9d76');rect(e.x+19,e.y+19,5,4,'#6b9d76');rect(e.x+2,e.y+11,6,4,'#8fba8b');
-    }
+ }
+ draw();
+}
+
+function reactionGame(){
+ arena.innerHTML='<div style="text-align:center;padding:22px 4px"><div style="font-size:3.3rem">🧠</div><p id="reactText" style="font-weight:900;font-size:1.1rem">Preparando la prueba…</p></div>';
+ const b=document.createElement('button');
+ b.className='reaction-button';b.textContent='ESPERÁ…';b.disabled=true;
+ controls.appendChild(b);
+ let attempts=0,ready=false,started=0;
+ active=true;
+ function next(){
+  if(attempts>=3){finishLevel();return;}
+  ready=false;b.disabled=true;b.style.background='#b8e8ff';b.textContent='ESPERÁ…';
+  $('reactText').textContent='No toques todavía. En serio.';
+  timer=setTimeout(()=>{
+   if(!active)return;
+   ready=true;started=performance.now();
+   b.disabled=false;b.textContent='¡YA, TOCÁ!';
+   b.style.background='#b9f6cf';
+   $('reactText').textContent='¡AHORA!';
+  },1000+Math.random()*2200);
+ }
+ b.onclick=()=>{
+  if(!active)return;
+  if(!ready){
+   score=Math.max(0,score-5);update();
+   say('¡TE ADELANTASTE! -5');
+   clearTimeout(timer);attempts++;timer=setTimeout(next,600);
+   return;
   }
-  function drawDoor(x,y){
-    rect(x,y,55,108,'#fff');rect(x+6,y+6,43,102,'#f9e7f3');rect(x+12,y+12,31,90,'#fff');rect(x+37,y+55,4,5,'#dba4c5');star(x+28,y+30,5,'#f4bdd6');
-  }
-  function drawEndScene(){
-    // soft moonlit park
-    ctx.fillStyle='#fff7fb';ctx.fillRect(0,0,W,H);
-    for(let i=0;i<22;i++)star((i*97+22)%W,(i*53+15)%260,2+i%2,'#f6c4dc');
-    rect(0,300,W,150,'#dcefd4');rect(0,300,W,12,'#c4e4bd');
-    // bushes / flower patches
-    for(let i=0;i<10;i++){let x=i*91-15;rect(x,286,55,22,'#b4d9b0');rect(x+8,277,34,15,'#b4d9b0');rect(x+13,296,5,5,'#f5a8cb');rect(x+33,292,5,5,'#fff')}
-    // bench
-    rect(290,245,220,15,'#c88e9e');rect(300,260,200,13,'#dba7b6');rect(310,273,9,43,'#b77e8d');rect(480,273,9,43,'#b77e8d');rect(285,239,230,8,'#e5b4c2');
-    drawRaccoon(390,203);drawBunny(345,222);
-    // big juice carton between raccoon and bunny
-    drawBaggio(378,244);rect(375,239,28,4,'#fff0f7');
-    text('Un lugarcito para vos ♡',400,355,19,'#9e6284','center');
-    text('FIN DEL NIVEL: AMISTAD',400,382,12,'#b27a99','center');
-  }
-  function update(dt){
-    if(!started||gameOver)return;
-    frame++;
-    if(transitionFlash>0)transitionFlash=Math.max(0,transitionFlash-dt*.045);
-    if(levelMessageTimer>0)levelMessageTimer--;
-    const speed=3.15;
-    player.vx=(input.right?speed:0)-(input.left?speed:0);
-    if(player.vx)player.face=Math.sign(player.vx);
-    player.x+=player.vx;
-    player.walk+=Math.abs(player.vx)*.12;
-    if(input.jump&&player.onGround){player.vy=-10.7;player.onGround=false;input.jump=false}
-    player.vy+=.48;player.y+=player.vy;player.onGround=false;
-    for(const p of platforms){
-      if(p.removed)continue;
-      if(p.unstable&&p.touchedAt!==null&&performance.now()-p.touchedAt>5000){p.removed=true;particles.push({x:p.x+p.w/2,y:p.y,type:'dust',life:25});continue}
-      const px=player.x+2, pr=player.x+player.w-2, prevBottom=player.y+player.h-player.vy, bottom=player.y+player.h;
-      if(pr>p.x&&px<p.x+p.w&&bottom>=p.y&&prevBottom<=p.y+8&&player.vy>=0&&player.y<p.y){
-        player.y=p.y-player.h;player.vy=0;player.onGround=true;
-        if(p.unstable&&p.touchedAt===null)p.touchedAt=performance.now();
-      }
-    }
-    // keep the bunny from slipping beneath the world; reset gently
-    if(player.y>H+80){player.x=Math.max(25,player.x-60);player.y=250;player.vy=0;player.invuln=60;ui.message.textContent='¡Uy! Probá de nuevo, Ren ♡'}
-    player.x=clamp(player.x,0,worldWidth()-player.w);
-    if(player.invuln>0)player.invuln--;
-    if(level===2){
-      for(const e of enemies){
-        if(!e.alive)continue;
-        e.x+=e.vx;e.phase+=.07;e.y=e.baseY+Math.sin(e.phase)*7;
-        if(e.x<220||e.x>950)e.vx*=-1;
-        if(player.invuln===0&&player.x+player.w>e.x&&player.x<e.x+e.w&&player.y+player.h>e.y&&player.y<e.y+e.h){
-          player.invuln=75;player.vy=-5;player.x-=player.face*20;ui.message.textContent='¡Cuidado! Las estrellitas te protegen ♡';
-        }
-      }
-      if(input.shoot&&shootCooldown<=0){bullets.push({x:player.x+(player.face>0?player.w:0),y:player.y+15,vx:player.face*7,life:70});shootCooldown=18}
-      if(shootCooldown>0)shootCooldown--;
-      for(const b of bullets){b.x+=b.vx;b.life--;for(const e of enemies){if(e.alive&&b.x>e.x&&b.x<e.x+e.w&&b.y>e.y&&b.y<e.y+e.h){e.alive=false;b.life=0;for(let k=0;k<8;k++)particles.push({x:e.x+e.w/2,y:e.y+e.h/2,type:'spark',life:25,vx:rand(-2,2),vy:rand(-2,2)})}}}
-      bullets=bullets.filter(b=>b.life>0);
-    }
-    for(const c of collectibles){
-      if(c.taken)continue;c.bob+=.09;
-      if(player.x+player.w>c.x&&player.x<c.x+c.w&&player.y+player.h>c.y&&player.y<c.y+c.h){
-        c.taken=true;score+=1;ui.score.textContent=`☆ ${score}`;ui.message.textContent='¡Una cajita de Baggio! Guardala con cariño ♡';
-        for(let k=0;k<10;k++)particles.push({x:c.x+10,y:c.y+12,type:'spark',life:25,vx:rand(-2,2),vy:rand(-3,1)});
-      }
-    }
-    for(const p of particles){p.x+=(p.vx||0);p.y+=(p.vy||0);p.life--}
-    particles=particles.filter(p=>p.life>0);
-    if(level===1&&player.x>860&&collectibles.some(c=>c.taken&&c.x>700)){nextLevel()}
-    else if(level===2&&player.x>1110&&player.y>200){nextLevel()}
-    else if(level===3&&door&&player.x+player.w>door.x&&player.y+player.h>door.y){finishGame();}
-    // camera follows player
-    camera=clamp(player.x-250,0,Math.max(0,worldWidth()-W));
-  }
-  function draw(){
-    ctx.clearRect(0,0,W,H);
-    if(level===3&&endingMode){drawEndScene();return}
-    drawBackground();
-    ctx.save();ctx.translate(-camera,0);
-    // level 1 extra mountain peak / level details
-    for(const p of platforms)drawPlatform(p);
-    if(level===1){
-      // mountain silhouette, snowy cap and small pink crystals
-      rect(610,250,190,130,'#f2d9e5');rect(645,205,130,55,'#f2d9e5');rect(680,165,75,45,'#f2d9e5');rect(702,145,34,25,'#fff');
-      rect(625,275,14,5,'#e9b7d0');rect(730,235,12,5,'#e9b7d0');
-      // goal flag
-      rect(800,40,4,40,'#d58eb0');rect(804,40,22,13,'#ffb5d0');star(815,46,4,'#fff');
-    }
-    for(const c of collectibles)if(!c.taken){let bob=Math.sin(c.bob)*3;drawBaggio(c.x,c.y+bob);star(c.x+11,c.y-7+bob,4,'#fff3b0')}
-    for(const e of enemies)drawEnemy(e);
-    for(const b of bullets){star(b.x,b.y,5,'#fff5a8');rect(b.x-3,b.y-2,6,4,'#ffcae0')}
-    for(const p of particles){if(p.type==='spark')star(p.x,p.y,3,'#fff4a8');else rect(p.x,p.y,5,4,'#f2c8dc')}
-    if(level===3&&door)drawDoor(door.x,door.y);
-    if(player.invuln%10<6)drawBunny(player.x,player.y);
-    ctx.restore();
-    if(level===1){
-      text('MONTAÑA DE NUBES',400,28,14,'#c17da0','center');
-      for(let i=0;i<3;i++)star(40+i*28,55+(i%2)*12,5,'#fff');
-    }else if(level===2){text('EL ATARDECER',400,28,14,'#a65377','center')}
-    else{text('LA PUERTA BLANCA',400,28,14,'#fff','center')}
-    if(transitionFlash>0){rect(0,0,W,H,`rgba(255,255,255,${transitionFlash*.9})`)}
-    // small world progress bar
-    rect(250,8,300,5,'#ffffff88');rect(250,8,300*(player.x/worldWidth()),5,'#ee9fc2');
-  }
-  function loop(t){const dt=Math.min(2,(t-last)/16.67||1);last=t;update(dt);draw();requestAnimationFrame(loop)}
-  function bindButton(id,key,hold=true){
-    const el=document.getElementById(id);
-    const down=e=>{e.preventDefault();input[key]=true;el.classList.add('active');if(!hold)input[key]=true};
-    const up=e=>{e.preventDefault();input[key]=false;el.classList.remove('active')};
-    el.addEventListener('pointerdown',down);el.addEventListener('pointerup',up);el.addEventListener('pointercancel',up);el.addEventListener('pointerleave',up);
-  }
-  bindButton('left','left');bindButton('right','right');bindButton('shoot','shoot');
-  const jumpBtn=document.getElementById('jump');
-  jumpBtn.addEventListener('pointerdown',e=>{e.preventDefault();input.jump=true;jumpBtn.classList.add('active')});
-  ['pointerup','pointercancel','pointerleave'].forEach(ev=>jumpBtn.addEventListener(ev,e=>{e.preventDefault();jumpBtn.classList.remove('active')}));
-  document.getElementById('startBtn').addEventListener('click',startGame);
-  // keyboard support as a convenience, while touch buttons remain the primary controls
-  window.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'||e.key==='a')input.left=true;if(e.key==='ArrowRight'||e.key==='d')input.right=true;if(e.key==='ArrowUp'||e.key===' '||e.key==='w')input.jump=true;if(e.key==='x')input.shoot=true});
-  window.addEventListener('keyup',e=>{if(e.key==='ArrowLeft'||e.key==='a')input.left=false;if(e.key==='ArrowRight'||e.key==='d')input.right=false;if(e.key==='x')input.shoot=false});
-  // first screen preview scene
-  makeLevel(1);draw();requestAnimationFrame(loop);
+  const ms=Math.round(performance.now()-started);
+  ready=false;attempts++;
+  const pts=ms<350?15:ms<650?10:5;
+  score+=pts;update();
+  say(ms+' ms. +'+pts+' puntos.');
+  b.disabled=true;b.textContent='¡BIEN HECHO!';
+  timer=setTimeout(next,850);
+ };
+ next();
+}
+
+function finishGame(){
+ clearTimer();show('ending');
+ $('finalScore').textContent=score;
+ $('rank').textContent=score>=100?'Caos profesional':score>=65?'Desastres certificados':'Pasantes del desastre';
+ $('endingEmoji').textContent='🏆';
+ $('endingTitle').textContent='¡SALVARON EL UNIVERSO!';
+ $('endingText').textContent='Noah el mapache y Ren el conejo juntaron '+score+' puntos y salvaron la realidad. El sistema va a revelar la verdad…';
+ timer=setTimeout(()=>{
+  if(ending.classList.contains('hidden'))return;
+  $('endingEmoji').textContent='🍞';
+  $('endingTitle').textContent='GIRO INESPERADO: ERA UNA TOSTADORA';
+  $('endingText').textContent='Todo este caos lo organizó una tostadora que quería que alguien le desenchufara el cargador. Noah y Ren trabajaron en equipo para resolver un problema que se arreglaba apagando y prendiendo el aparato. La tostadora igual les puso un 6. FIN.';
+ },1800);
+}
+$('startBtn').onclick=start;
+$('againBtn').onclick=start;
 })();
 </script>
 </body>
